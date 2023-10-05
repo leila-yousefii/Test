@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { updateProduct } from "../productsSlice";
-
+import { updateProduct } from "../actions";
 const UpdateProductModal = ({ product, onClose, mode }) => {
   const [updatedProductName, setUpdatedProductName] = useState(product.name);
   const [updatedProductPrice, setUpdatedProductPrice] = useState(

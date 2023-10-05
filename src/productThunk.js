@@ -10,7 +10,8 @@ export const fetchProducts = createAsyncThunk(
       name: product.title,
       price: product.price,
       image: product.image,
-    }));
+    }
+      ));
 return products
   }
 )

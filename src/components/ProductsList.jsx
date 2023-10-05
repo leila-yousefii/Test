@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { selectProducts, removeProduct } from "../productsSlice";
+import { selectProducts } from "../productsSlice";
 import { fetchProducts } from "../productThunk";
 import { useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
@@ -8,6 +8,7 @@ import { AiOutlineEdit } from "react-icons/ai";
 import UpdateProductModal from "./UpdateProduct";
 import { AiOutlinePlus } from "react-icons/ai";
 import AddProductModal from "./ProductForm";
+import { removeProduct } from './../actions';
 const ProductList = () => {
   const products = useSelector(selectProducts);
   const dispatch = useDispatch();

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addProduct } from "../productsSlice";    
 import { v4 as uuidv4 } from 'uuid';
 import noimage from '../../public/no-image.jpg'
+import { addProduct } from "../actions";
 
 
 const AddProductModal = ({ onClose }) => {
