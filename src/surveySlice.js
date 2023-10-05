@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import {resetSurvey, submitAnswer } from './actions';
 
 const initialState = {
   answers: {},
@@ -8,17 +9,20 @@ const surveySlice = createSlice({
   name: 'survey',
   initialState,
   reducers: {
-    submitAnswer: (state, action) => {
-      const { questionId, answer } = action.payload;
-      state.answers[questionId] = answer;
-    },
-    resetSurvey: (state) => {
-      state.answers = {};
-    },
+  
   },
+  extraReducers: (builder) => {
+    builder
+      .addCase(submitAnswer,(state,action)=>{
+        const { questionId, answer } = action.payload;
+        state.answers[questionId] = answer;
+      })
+      .addCase(resetSurvey,(state)=>{
+        state.answers = {};
+      })
+      }
 });
 
-export const { submitAnswer, resetSurvey } = surveySlice.actions;
 
 export default surveySlice.reducer;
 

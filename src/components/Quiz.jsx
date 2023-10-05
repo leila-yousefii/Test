@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { submitAnswer, resetSurvey } from '../surveySlice';
-
+import { submitAnswer, resetSurvey } from "../actions";
 import { useForm, Controller } from 'react-hook-form';
 
 const questions = [
