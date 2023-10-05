@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addProduct } from "../productsSlice";
+import { addProduct } from "../productsSlice";    
+import { v4 as uuidv4 } from 'uuid';
+import noimage from '../../public/no-image.jpg'
+
 
 const AddProductModal = ({ onClose }) => {
   const [newProductName, setNewProductName] = useState("");
@@ -8,12 +11,15 @@ const AddProductModal = ({ onClose }) => {
   const dispatch = useDispatch();
 
   const handleAddProduct = () => {
+    const id = uuidv4();
     if (newProductName && newProductPrice) {
       const newProduct = {
         name: newProductName,
         price: parseFloat(newProductPrice),
+        id:id,
+        image: noimage
       };
-
+      console.log('Dispatching addProducts');
       dispatch(addProduct(newProduct));
       onClose();
     }

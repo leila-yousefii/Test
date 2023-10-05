@@ -13,7 +13,9 @@ const UpdateProductModal = ({ product, onClose, mode }) => {
     const updatedProduct = {
       name: updatedProductName,
       price: parseFloat(updatedProductPrice),
+      image:product.image,
     };
+    console.log('Dispatching updateProducts');
 
     dispatch(updateProduct({ id: product.id, updatedProduct }));
     onClose();

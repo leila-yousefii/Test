@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { selectProducts, removeProduct, setProducts } from "../productsSlice";
-import axios from "axios";
+import { selectProducts, removeProduct } from "../productsSlice";
+import { fetchProducts } from "../productThunk";
 import { useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { AiOutlineEdit } from "react-icons/ai";
@@ -13,7 +13,6 @@ const ProductList = () => {
   const dispatch = useDispatch();
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isAddModalOpen, setAddModalOpen] = useState(false);
-
   const [modalMode, setModalMode] = useState(null);
 
   const openUpdateModal = (product) => {
@@ -23,12 +22,10 @@ const ProductList = () => {
   const openAddModal = () => {
     setAddModalOpen(true);
   };
-
   const openDescriptionModal = (product) => {
     setSelectedProduct(product);
     setModalMode("description");
   };
-
   const closeModal = () => {
     setSelectedProduct(null);
     setModalMode(null);
@@ -37,28 +34,13 @@ const ProductList = () => {
     setAddModalOpen(false);
   };
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await axios.get("https://fakestoreapi.com/products");
-        const products = response.data.map((product) => ({
-          id: product.id,
-          name: product.title,
-          price: product.price,
-          image: product.image,
-        }));
-        dispatch(setProducts(products));
-      } catch (error) {
-        console.error("Error fetching products:", error);
-      }
-    };
-
-    fetchProducts();
+    dispatch(fetchProducts());
   }, [dispatch]);
 
   const handleRemove = (id) => {
-    dispatch(removeProduct(id));
+      dispatch(removeProduct(id));
   };
-
+  
   return (
     <div  id="products">
       <div>
@@ -77,7 +59,7 @@ const ProductList = () => {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {products.map((product) => (
-          <>
+          
             <div
               key={product.id}
               className="flex flex-col h-min w-56 p-1 border-box bg-white rounded xl"
@@ -117,7 +99,7 @@ const ProductList = () => {
                 </div>
               </div>
             </div>
-          </>
+        
         ))}
       </div>
       {selectedProduct && (
